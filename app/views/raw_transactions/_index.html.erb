@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Raw Transactions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>T date</th>
+      <th>T type</th>
+      <th>T quantity</th>
+      <th>T total price</th>
+      <th>T price unit</th>
+      <th>T supplier</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @material.raw_transactions.each do |raw_transaction| %>
+      <tr>
+
+        <td><%= raw_transaction.t_date %></td>
+        <td><%= raw_transaction.t_type %></td>
+        <td><%= raw_transaction.t_quantity %></td>
+        <td><%= raw_transaction.t_total_price %></td>
+        <td><%= raw_transaction.t_price_unit %></td>
+        <td><%= raw_transaction.t_supplier %></td>
+        <td><%= raw_transaction.material_id %></td>
+        <td><%= link_to 'Show', 
+  material_raw_transaction_path(@material, raw_transaction) %> </td>
+        <td><%= link_to 'Edit', 
+          edit_material_raw_transaction_path(@material,raw_transaction)
+          %></td>
+
+        <td><%= link_to 'Destroy', material_raw_transaction_path(@material, raw_transaction), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to 'New Raw transaction', 
+  new_material_raw_transaction_path(@material) %>
+<br>
+
+

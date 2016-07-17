@@ -1,0 +1,67 @@
+<%= form_for(@material) do |f| %>
+  <% if @material.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@material.errors.count, "error") %> prohibited this material from being saved:</h2>
+
+      <ul>
+      <% @material.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :unit %><br>
+    <%= f.text_field :unit %>
+  </div>
+  <div class="field">
+    <%= f.label :minimum_stock %><br>
+    <%= f.number_field :minimum_stock %>
+  </div>
+  <div class="field">
+    <%= f.label :average_price %><br>
+    <%= f.text_field :average_price %>
+  </div>
+  <div class="field">
+    <%= f.hidden_field :current_stock, :value => 0 %>
+  </div>
+
+  <%= f.fields_for :raw_transactions do |p|%>
+    <div class="field">
+      <%= p.label :t_date %><br>
+      <%= p.date_select :t_date %>
+    </div>
+    
+    <div class="field">
+      <p>Jenis Transaksi</p>
+      <%= p.radio_button :t_type, 'tambah', :checked => true %>
+      <%= label :t_type_tambah, 'tambah' %>
+      <%= p.radio_button :t_type, 'kurang'%>
+      <%= label :t_type_kurang, 'kurang' %>
+    </div>
+
+    <div class="field">
+      <%= p.label :t_quantity, "Kuantiti" %><br>
+      <%= p.number_field :t_quantity %>
+    </div>
+
+    <div class="field">
+      <%= p.label :t_total_price, "Total Harga" %><br>
+      <%= p.number_field :t_total_price %>
+    </div>
+
+    <div class="field">
+      <%= p.label :t_supplier, "Pembekal" %><br>
+      <%= p.text_field :t_supplier %>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

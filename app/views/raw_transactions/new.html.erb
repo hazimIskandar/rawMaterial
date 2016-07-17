@@ -1,0 +1,9 @@
+<h1><%= @material.name%></h1>
+<p><%= @material.current_stock%></p>
+
+
+<h1>New Raw Transaction</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', material_path(@material) %>
