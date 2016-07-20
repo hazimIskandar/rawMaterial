@@ -33,3 +33,9 @@
 <br>
 
 <%= link_to 'New Material', new_material_path %>
+
+<%= @materials.group_by_day(:created_at).count %>
+<%= pie_chart Material.group(:name).count %>
+<%= bar_chart RawTransaction.group_by_month(:t_date).sum(:t_total_price) %>
+<%= column_chart Material.group_by_day(:created_at, format: "%l %P").count %>
+

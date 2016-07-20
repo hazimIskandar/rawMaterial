@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160715024544) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "materials", force: :cascade do |t|
     t.string   "name"
     t.string   "unit"
@@ -35,6 +38,7 @@ ActiveRecord::Schema.define(version: 20160715024544) do
     t.integer  "material_id"
   end
 
-  add_index "raw_transactions", ["material_id"], name: "index_raw_transactions_on_material_id"
+  add_index "raw_transactions", ["material_id"], name: "index_raw_transactions_on_material_id", using: :btree
 
+  add_foreign_key "raw_transactions", "materials"
 end
